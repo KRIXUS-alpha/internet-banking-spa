@@ -1,0 +1,102 @@
+<p>transfer works!</p>
+
+Acc:
+<select [(ngModel)]="toAcck" class="form-control" (click)="getUnlockedAmount()">
+  <option [ngValue]="item" *ngFor="let item of approved">
+    {{item.status=="approved"?item.toAcc:undefined}}
+  </option>
+</select>
+Balance :{{currentUser!.balance}}<br>
+Amount not locked: {{sendingPower}}
+Amount: <input type="number" [(ngModel)]="amount" class="form-control" [max]="(sendingPower)" (onChange)="validateAmount()">
+<div *ngIf="validateAmount()" >
+    Please provide a valid amount
+</div>
+<br>
+
+<input type="button" *ngIf="!validateAmount(); else elseBlock" (click)="transferapp()" value="Transfer" class="btn btn-primary">
+<ng-template  #elseBlock>
+  <input type="button" disabled="disabled" (click)="transferapp()" value="Transfer" class="btn btn-primary">
+</ng-template>
+
+
+
+
+
+<!-- <form [formGroup]="transferForm" class="form-group">
+
+    <label for="first-name">to account: </label>
+    <input id="first-name" type="text" formControlName="toAcc" class="form-control">
+
+    <label for="last-name">amount: </label>
+    <input id="last-name" type="text" formControlName="amount" class="form-control">
+
+</form> -->
+
+<h1>Add Beneficiary</h1>
+
+<!-- <form  class="form-group"> -->
+
+<label for="first-name"> Account: </label>
+<input type="text" [(ngModel)]="benAcc" class="form-control">
+
+<label>Name: </label>
+<input type="text" [(ngModel)]="benName" class="form-control">
+<input type="button" (click)="addBen()" value="Add Beneficiary" class="btn btn-primary">
+
+<!-- </form> -->
+
+<h1>Transaction History</h1>
+
+Search for transactions<input type="text" [(ngModel)]="tquery">
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">To Account</th>
+      <th scope="col">Date</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Status</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of currentUser?.transactions| search:tquery">
+      <th scope="row">{{item.id}}</th>
+      <td>{{item.toAcc}}</td>
+      <td>{{item.date}}</td>
+      <td>{{item.amount}}</td>
+      <td>{{item.status}}</td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+<h1>Beneficiaries</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">To Account</th>
+      <th scope="col">Status</th>
+      <th scope="col">Conditions</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of currentUser?.beneficiaries">
+      <th scope="row">{{item.id}}</th>
+      <td>{{item.toAcc}}</td>
+      <td>{{item.status}}</td>
+      <td>{{item.conditions}}</td>
+
+
+    </tr>
+
+  </tbody>
+</table>

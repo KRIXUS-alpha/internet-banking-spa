@@ -1,0 +1,92 @@
+<p>admin works!</p>
+
+<h1>Approve Transactions</h1>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">From Acc</th>
+        <th scope="col">To Account</th>
+        <th scope="col">Date</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Status</th>
+        <th scope="col">Conditions Pass</th>
+        <th scope="col">Approve or decline</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of currentUser?.approveTrans">
+        <th scope="row">{{item.id}}</th>
+        <td>{{item.toAcc}}</td>
+        <td>{{item.date}}</td>
+        <td>{{item.amount}}</td>
+        <td>{{item.status}}</td>
+        <td>{{item.conditions}}</td>
+        <td><input type="button"  (click)="approveTrans(item)"class="btn btn-primary" value="Approve"><input type="button" class="btn btn-primary" (click)="declineTrans(item)" value="Decline"></td>
+
+
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+  <h1>Approve Beneficiaries</h1>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">From Acc</th>
+        <th scope="col">To Account</th>
+        <th scope="col">Status</th>
+        <th scope="col">Conditions Pass</th>
+        <th scope="col">Approve or decline</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of currentUser?.approveBen">
+        <th scope="row">{{item.id}}</th>
+        <td>{{item.fromAcc}}</td>
+        <td>{{item.toAcc}}</td>
+        <td>{{item.status}}</td>
+        <td>{{item.conditions}}</td>
+        <td><input type="button" *ngIf="item.conditions == 'matched'"(click)="approve(item)" class="btn btn-primary" value="Approve"><span>  </span><input type="button" (click)="decline(item)" class="btn btn-primary" value="Decline"></td>
+
+
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">From Acc</th>
+        <th scope="col">To Account</th>
+        <th scope="col">Status</th>
+        <th scope="col">Conditions Pass</th>
+        <th scope="col">Approve or decline</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of getUsersForApproval()">
+        <th scope="row">{{item.name}}</th>
+        <td>{{item.accNo}}</td>
+        <td>{{item}}</td>
+        <td>{{item}}</td>
+        <td>{{item.approved}}</td>
+        <td><input type="button" (click)="approveUser(item)" class="btn btn-primary" value="Approve"><span>  </span><input type="button"  class="btn btn-primary" (click)="declineUser(item)"value="Decline"></td>
+
+
+      </tr>
+      
+    </tbody>
+  </table>

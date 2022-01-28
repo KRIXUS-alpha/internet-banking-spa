@@ -1,0 +1,24 @@
+<p>profile works!</p>
+<div *ngIf="getUserStatus() == 'true'">
+    <h2>Login Successful</h2>
+    <h3>{{user!.name== undefined ? " " : user!.name}}</h3>
+    <h3>{{user!.email== undefined ? " " : user!.email}}</h3>
+    <h3>{{user!.accNo== undefined ? " " : user!.accNo}}</h3>
+    <h3>{{user!.userName== undefined ? " " : user!.userName}}</h3>
+    <h3>{{user!.balance== undefined ? " " : user!.balance}}</h3>
+</div>
+
+<div *ngIf="getUserStatus() == 'false'">
+    <h2>Wait for approval</h2>
+    <!-- <h3>{{user!.name== undefined ? " " : user!.name}}</h3>
+    <h3>{{user!.email== undefined ? " " : user!.email}}</h3>
+    <h3>{{user!.accNo== undefined ? " " : user!.accNo}}</h3>
+    <h3>{{user!.userName== undefined ? " " : user!.userName}}</h3>
+    <h3>{{user!.balance== undefined ? " " : user!.balance}}</h3> -->
+</div>
+
+<div *ngIf="getUserStatus() == 'wrong account number'">
+    <h2>Edit account number</h2>
+    <input type="text" [(ngModel)]="userAcc">
+    <input type="button" value="Update Account"(click)="updateAcc()">
+</div>
